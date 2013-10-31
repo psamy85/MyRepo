@@ -19,11 +19,6 @@ object Application extends Controller with Authentication {
 
   def provisioning = Authenticated {implicit request =>
     BucketAddon.createBucketAddon()
-    val reg:JsValue = js \ "region"
-    val regStr = reg match {
-      case JsString(str) => str
-      case _ => ""
-    }
     Ok(BucketAddon.createJson)
   }
   
