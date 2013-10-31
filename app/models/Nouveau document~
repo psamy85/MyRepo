@@ -1,0 +1,10 @@
+
+    def put(id: Long) {
+      val db = Database.find(id)
+      plan = JSON.parse(request.body.read)['plan']
+      db.change_plan(plan)
+      result = { config: { "MYSQL_URL" => db.url },
+         message: "your message here" }
+      result.to_json
+    }
+

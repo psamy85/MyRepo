@@ -1,0 +1,18 @@
+{
+  "id": "cleveraddon",
+  "name": "CleverAddon",
+  "api": {
+    "config_vars": [ "CLEVERADDON_" ],
+    "regions": [ "us" ],
+    "password": "6596df0dc3485f306fe8e5c311e0f5d4",
+    "sso_salt": "1761092f21e7a1e160d9e47b252e7499",
+    "production": {
+      "base_url": "https://yourapp.com/heroku/resources",
+      "sso_url": "https://yourapp.com/sso/login"
+    },
+    "test": {
+      "base_url": "http://localhost:9000/heroku/resources",
+      "sso_url": "http://localhost:9000/sso/login"
+    }
+  }
+}

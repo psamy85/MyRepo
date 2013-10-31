@@ -1,0 +1,11 @@
+require 'sequel'
+
+url = ENV['CLEVERADDON_URL']
+puts "Connecting to #{url}"
+
+begin
+  db = Sequel.connect(url)
+  puts "This database has the following tables: #{db.tables.inspect}"
+rescue => e
+  abort "Failed to access database: #{e.message}"
+end

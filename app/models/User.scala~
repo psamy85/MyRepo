@@ -1,0 +1,17 @@
+package models
+import anorm._
+import anorm.SqlParser._
+import play.api.db._
+import play.api.Play.current
+import play.api.libs.json._
+
+
+case class User(username: String, password: String)
+
+
+object User {
+
+  val username = "cleveraddon"
+  val password = "6596df0dc3485f306fe8e5c311e0f5d4"
+
+}

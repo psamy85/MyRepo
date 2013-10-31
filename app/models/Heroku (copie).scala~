@@ -1,0 +1,66 @@
+package models
+import anorm._
+import anorm.SqlParser._
+import play.api.db._
+import com.basho.riak.client.RiakFactory
+import play.api.Play.current
+import play.api.libs.json._
+import com.basho.riak.client.bucket.Bucket
+import java.util.UUID
+import com.basho.riak.client.http.RiakClient
+
+
+
+object BucketAddon {
+
+    val name = "programme_de_test"
+
+    def searchBucket() ={
+      DB.withConnection { implicit c =>
+        if (name == SQL("select label from addon")) {
+         // val uuid = SQL("select label from addon where label = ").as(label *)
+         // val url: String = "http://localhost:5432"
+        }else{ 
+          val addon ={
+            val uuid = "bucketId_"+UUID.randomUUID
+            val url: String = "http://localhost:5432"
+          }
+        }
+        val riakClient = RiakFactory.pbcClient()
+      }
+    }
+    
+    def createBucketAddon() ={
+      DB.withConnection { implicit c =>
+        SQL("insert into addon (label, uuid) values ({label},{uuid})").on(
+          'label -> name,
+          'uuid -> addon.uuid
+        ).executeUpdate()
+      }
+      val myBucket = riakClient.createBucket(uuid.toString).execute()
+    }
+
+   def createJson(): JsValue ={
+      JsObject(Seq("id" -> JsString(uuid),"config" -> JsObject(Seq("CLEVERADDON_URL"->JsString(url)))))
+   }
+
+   def deleteBucketAddon(id: String) {
+     val myBucket = riakClient.fetchBucket(id).execute()
+     val listkeys = myBucket.keys().getAll()
+     for (i <- 0 to listkeys.size()) {
+       myBucket.delete(listkeys).execute()
+     }
+     //TODO
+     riakClient.shutdown()
+     DB.withConnection { implicit c =>
+       SQL("delete from addon where uuid = {uuid}").on(
+         'uuid -> uuid
+       ).executeUpdate()
+     }
+   }
+    
+   def changeBucketAddon(id: String) {
+     val myBucket = riakClient.fetchBucket(id).execute()
+     //var plan = myBucket.getSchema()
+   }
+}
