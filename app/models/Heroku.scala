@@ -48,6 +48,7 @@ object BucketAddon {
     
    def changeBucketAddon(id: String) {
      val myBucket = riakClient.fetchBucket(id).execute()
+     
      //TODO
    }
 }

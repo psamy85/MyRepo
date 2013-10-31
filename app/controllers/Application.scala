@@ -11,7 +11,6 @@ import play.api.mvc.Security.Authenticated
 
 object Application extends Controller with Authentication {
 
-  //var result: JsValue = 
 
   def index = Action { implicit request =>
     Ok("Hello World")
@@ -19,11 +18,6 @@ object Application extends Controller with Authentication {
 
   def provisioning = Authenticated {implicit request =>
     BucketAddon.createBucketAddon()
-    val reg:JsValue = js \ "region"
-    val regStr = reg match {
-      case JsString(str) => str
-      case _ => ""
-    }
     Ok(BucketAddon.createJson)
   }
   
@@ -37,6 +31,12 @@ object Application extends Controller with Authentication {
     Ok
   }
     
+    
+    /* val reg:JsValue = js \ "region"
+    val regStr = reg match {
+      case JsString(str) => str
+      case _ => ""
+    }*/
 
 }
 
